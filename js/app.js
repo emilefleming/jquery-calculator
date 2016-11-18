@@ -20,49 +20,48 @@
     $('#screen').empty();
   }
 
-  const evaluate = function() {
-    const exp = $('#screen').text();
-    let leftSide = '';
-    let rightSide = '';
-    let side = 'left';
-    let opCount = 0;
-    let operator = '';
-    for (let i = 0; i < exp.length; i++) {
-      if (isNaN(exp[i]) && exp[i] !== '.') {
-        side = 'right';
-        opCount++;
-        operator = exp[i];
-      }
-      if (opCount > 1) {
-        $('#screen').text('ERROR');
-        return;
-      }
-      if (side === 'left' && !isNaN(exp[i])) {
-        leftSide += exp[i];
-      } else if (side === 'right' && !isNaN(exp[i])) {
-        rightSide += exp[i];
-      } else if (side === 'left' && exp[i] === '.') {
-        leftSide += '.';
-      } else if (side === 'right' && exp[i] === '.') {
-        rightSide += '.';
-      }
-    }
-    switch (operator) {
-      case '+':
-        return Number(leftSide) + Number(rightSide);
-      case '-':
-        return Number(leftSide) - Number(rightSide);
-      case 'x':
-        return Number(leftSide) * Number(rightSide);
-      case '÷':
-        if (!Number(rightSide)) {
-          $('#screen').text('ERROR');
-          break;
-        }
-        return Number(leftSide) / Number(rightSide);
-    };
+  const error = function () {
+    $('#screen').text('ERROR');
   }
 
+  const add = function(a, b) {
+    return Number(a) + Number(b);
+  }
+
+  const subtract = function(a, b) {
+    return Number(a) - Number(b);
+  }
+
+  const multiply = function(a, b) {
+     return Number(a) * Number(b);
+  }
+
+  const divide = function(a, b) {
+    if (b === '0') {
+      alert('bro u cant divide by zero');
+      return;
+    }
+    return Number(a) / Number(b);
+  }
+
+  const evaluate = function() {
+    const rawExp = $('#screen').text();
+    const expParts = rawExp.match(/(\-?\d*\.?\d+)(\+|\-|\x|\÷)(\-?\d*\.?\d+)/);
+    const a = expParts[1];
+    const b = expParts[3];
+    switch (expParts[2]) {
+      case '+':
+        return add(a, b);
+      case '-':
+        return subtract(a, b);
+      case 'x':
+        return multiply(a, b);
+      case '÷':
+        return divide(a, b);
+      default:
+        console.log(`Didn't recognize the operator ${expParts[2]}`);
+    }
+  }
 
   $('.buttons').on('click', 'span', (event) => {
     toScreen($(event.target).text())
@@ -98,5 +97,4 @@
     }
     toScreen(event.key);
   })
-
 })();
