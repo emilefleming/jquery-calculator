@@ -102,6 +102,10 @@ h2 {
   opacity: 1;
 }
 
+.screen span {
+	white-space:pre;
+}
+
 #screen-container {
   font-size: 24px;
   overflow: scroll;
@@ -109,7 +113,8 @@ h2 {
 }
 
 #buttons-container {
-  background-color: #EFEFEF;
+	/*background-color: #FCFCFC;*/
+  background-color: white;
   bottom: 0;
   border-top: 1px solid #DDD;
   display: flex;
@@ -145,6 +150,7 @@ h2 {
 #operators-container {
   display: flex;
   flex-direction: column;
+	height: 100%;
   width: 66px;
 }
 
@@ -163,6 +169,7 @@ h2 {
   color: white;
   display: flex;
   flex-direction: column;
+	height: 100%;
   width: 134px;
 }
 

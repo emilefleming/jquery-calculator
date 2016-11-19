@@ -2,6 +2,7 @@
   'use strict';
 
   let $screen = $('.screen');
+  let leftSideLength = 0;
 
   const clear = function() {
     $screen.empty();
@@ -74,13 +75,27 @@
   };
 
   const padScreens = function() {
-    $('.screens');
+    const diff = $screen.text().length - leftSideLength;
+
+    leftSideLength = Math.max($screen.text().length, leftSideLength);
+    if (diff < 1 || $('.screen').length < 2) {
+      for (let i = 0; i < diff * -1; i++) {
+        $screen.prepend($('<span>').text(' '));
+      }
+      return;
+    }
+    for (const screen of $('.screen.solved')) {
+      console.log(screen);
+      for (let i = 0; i < diff; i++) {
+        $(screen).prepend($('<span>').text(' '));
+      }
+    }
   };
 
   const printResult = function(result) {
     padScreens();
     $screen.addClass('solved');
-    $('<span>').addClass('operator').text(' =').appendTo($screen);
+    $('<span>').addClass('operator').text(' = ').appendTo($screen);
     $('<span>').addClass('result').text(result).appendTo($screen);
     $screen = $('<div>').addClass('screen').append($('<span>').text(result));
     $('#screen-container').prepend($screen);
