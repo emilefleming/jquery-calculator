@@ -1,0 +1,176 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* CUSTOM STYLES */
+
+* {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'PT Sans', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  padding: 10%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  height: 25%;
+  width: 33.33%;
+}
+
+button:focus {
+  outline: 0;
+}
+
+h2 {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.operator {
+  padding: 0 10px;
+  color: #EF382B;
+}
+
+.screen {
+  padding: 10px;
+  overflow-x: scroll;
+}
+
+.solved {
+  opacity: .4;
+}
+
+.solved:hover {
+  opacity: 1;
+}
+
+#screen-container {
+  font-size: 24px;
+  overflow: scroll;
+  padding-bottom: 200px
+}
+
+#buttons-container {
+  bottom: 0;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+}
+
+#numbers-container button:last-child {
+  width: 66.66% ;
+}
+
+#numbers-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 200px;
+}
+
+#numbers-container button {
+  color: #444;
+}
+
+#numbers-container button:hover {
+  background-color: #444;
+  color: white;
+}
+
+#operators-container {
+  display: flex;
+  flex-direction: column;
+  width: 66px;
+}
+
+#operators-container button {
+  color: #EF382B;
+  width: 100%;
+}
+
+#operators-container button:hover {
+  background-color: #EF382B;
+  color: white;
+  width: 100%;
+}
+
+#actions-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 134px;
+}
+
+#actions-container button {
+  color: #FFC900;
+  width: 100%;
+}
+
+#actions-container button:hover {
+  background-color: #FFC900;
+  color: white;
+  width: 100%;
+}
