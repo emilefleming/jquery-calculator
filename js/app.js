@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const $screen = $('#screen');
+  let $screen = $('.screen');
 
   const clear = function() {
     $screen.empty();
@@ -36,9 +36,9 @@
         return add(op1, op2);
       case '-':
         return subtract(op1, op2);
-      case 'x':
+      case '*':
         return multiply(op1, op2);
-      case '÷':
+      case '/':
         return divide(op1, op2);
       default:
         return 'ERROR';
@@ -47,7 +47,7 @@
 
   const eval1 = function(text) {
     let finalResult = text;
-    const chunk = text.match(/(-?\d*\.?\d+)(\x|÷)(-?\d*\.?\d+)/);
+    const chunk = text.match(/(-?\d*\.?\d+)(\*|\/)(-?\d*\.?\d+)/);
 
     if (chunk) {
       const result = evalChunk(chunk);
@@ -73,36 +73,63 @@
     return finalResult;
   };
 
-  const evaluate = function(text) {
+  const printResult = function(result) {
+    $screen.addClass('solved');
+    $('<span>').addClass('operator').text('=').appendTo($screen);
+    $('<span>').addClass('result').text(result).appendTo($screen);
+    $screen = $('<div>').addClass('screen').append($('<span>').text(result));
+    $('#screen-container').prepend($screen);
+  };
+
+  const evaluate = function() {
+    const text = $screen.text();
     const result = eval1(text);
     const finalResult = eval2(result);
 
-    return finalResult;
+    printResult(finalResult);
+  };
+
+  const addOp = function(op) {
+    $('<span>').addClass('operator').text(op).appendTo($screen);
   };
 
   const toScreen = function(text) {
-    if (text === 'C') {
-      clear();
-
-      return;
+    switch (text) {
+      case 'CLEAR':
+        clear();
+        break;
+      case $screen.text() === 'ERROR':
+        break;
+      case 'ENTER':
+        $screen.text(evaluate($screen.text()));
+        break;
+      case 'DELETE' :
+        $screen.children(':last-child').remove();
+        break;
+      case '+':
+        addOp('+');
+        break;
+      case '-':
+        addOp('-');
+        break;
+      case '*':
+        addOp('*');
+        break;
+      case '/':
+        addOp('/');
+        break;
+      default:
+        $('<span>').text(text).appendTo($screen);
+        break;
     }
-    if ($screen.text() === 'ERROR') {
-      return;
-    }
-    if (text === '=') {
-      $screen.text(evaluate($screen.text()));
-
-      return;
-    }
-    $screen.text($screen.text() + text);
   };
 
-  $('.buttons').on('click', 'span', (event) => {
+  $('#buttons-container').on('click', 'button', (event) => {
     toScreen($(event.target).text());
   });
 
   $('body').keydown(() => {
-    if (event.key.search(/[0-9]|\.|-|\+/) === 0) {
+    if (event.key.search(/[0-9]|\.|-|\+|\/|\*/) === 0) {
       toScreen(event.key);
 
       return;
@@ -115,13 +142,7 @@
         $screen.text('');
         break;
       case 'Backspace':
-        $screen.text($screen.text().slice(0, -1));
-        break;
-      case '*':
-        toScreen('x');
-        break;
-      case '/':
-        toScreen('÷');
+        $screen.children(':last-child').remove();
         break;
       default:
         break;

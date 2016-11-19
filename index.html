@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>jQuery Calculator</title>
-  <script defer src="js/jquery.js"></script>
-  <script defer src="js/app.js"></script>
-  <link rel="stylesheet" href="css/app.css">
-</head>
-<body>
-  <div id="calculator">
-    <div id="screen-container">
-      <div id="screen"></div>
-    </div>
-
-    <div id="buttons-container">
-      <div class="buttons">
-        <span class="operator" id="clear">C</span>
-        <span class="operator">÷</span>
-        <span class="operator">x</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span class="operator">-</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span class="operator">+</span>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span class="operator" id="equals">=</span>
-        <div class="l-row">
-          <span id="zero">0</span>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">    <title>calc</title>
+    <script defer src="js/jquery.js"></script>
+    <script defer src="js/app.js"></script>
+    <link rel="stylesheet" href="css/master.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <div id="screen-container">
+        <div class="screen">
         </div>
       </div>
+    </main>
+    <div id="buttons-container">
+      <div id="numbers-container">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>.</button>
+        <button>0</button>
+      </div>
+      <div id="operators-container">
+        <button>+</button>
+        <button>-</button>
+        <button>*</button>
+        <button>/</button>
+      </div>
+      <div id="actions-container">
+        <button>ENTER</button>
+        <button>DELETE</button>
+        <button>CLEAR</button>
+      </div>
     </div>
-  </div>
 
-</body>
+  </body>
 </html>
