@@ -92,7 +92,6 @@ h2 {
 
 .screen {
   padding: 10px;
-  overflow-x: scroll;
 }
 
 .solved {
@@ -110,10 +109,12 @@ h2 {
 }
 
 #buttons-container {
-  background-color: white;
+  background-color: #EFEFEF;
   bottom: 0;
   border-top: 1px solid #DDD;
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   height: 200px;
   justify-content: center;
   left: 0;

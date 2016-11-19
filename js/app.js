@@ -73,7 +73,12 @@
     return finalResult;
   };
 
+  const padScreens = function() {
+    $('.screens');
+  };
+
   const printResult = function(result) {
+    padScreens();
     $screen.addClass('solved');
     $('<span>').addClass('operator').text(' =').appendTo($screen);
     $('<span>').addClass('result').text(result).appendTo($screen);
