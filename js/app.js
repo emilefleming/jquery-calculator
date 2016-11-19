@@ -75,14 +75,14 @@
 
   const printResult = function(result) {
     $screen.addClass('solved');
-    $('<span>').addClass('operator').text('=').appendTo($screen);
+    $('<span>').addClass('operator').text(' =').appendTo($screen);
     $('<span>').addClass('result').text(result).appendTo($screen);
     $screen = $('<div>').addClass('screen').append($('<span>').text(result));
     $('#screen-container').prepend($screen);
   };
 
   const evaluate = function() {
-    const text = $screen.text();
+    const text = $screen.text().replace(/ /g, '');
     const result = eval1(text);
     const finalResult = eval2(result);
 
@@ -107,16 +107,16 @@
         $screen.children(':last-child').remove();
         break;
       case '+':
-        addOp('+');
+        addOp(' + ');
         break;
       case '-':
-        addOp('-');
+        addOp(' - ');
         break;
       case '*':
-        addOp('*');
+        addOp(' * ');
         break;
       case '/':
-        addOp('/');
+        addOp(' / ');
         break;
       default:
         $('<span>').text(text).appendTo($screen);
