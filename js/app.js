@@ -6,7 +6,6 @@
   const variables = {};
 
   const labelLength = function(event) {
-    console.log(event.which);
     if (event.which !== 8 && event.which < 65 || event.which > 122) {
       event.preventDefault();
     }
