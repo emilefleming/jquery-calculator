@@ -113,7 +113,7 @@
     padScreens();
     $screen.addClass('solved');
     $('<span>').addClass('operator equals').text(' = ').appendTo($screen);
-    const $res = $('<span>').addClass('result').text(result).appendTo($screen);
+    const $res = $('<label>').addClass('result').text(result).appendTo($screen);
     const $input = $('<input>').attr('type', 'text').attr('size', '1');
 
     $input.focusout(setVar).focusin(remVar).keydown(labelLength).appendTo($res);
@@ -188,8 +188,9 @@
     toScreen($(event.target).text());
   });
 
-  $('#screen-container').on('click', '.screen span', (event) => {
-    if (event.target.tagName === 'INPUT') {
+  $('#screen-container').on('click', (event) => {
+    if (event.target.tagName !== 'SPAN' && event.target.tagName !== 'LABEL') {
+      console.log(event.target.tagName);
       return;
     }
     $(event.target).parent().toggleClass('starred');
