@@ -3,29 +3,43 @@
 
   let $screen = $('.screen');
   let leftSideLength = 0;
+  const variables = {};
+
+  const labelLength = function(event) {
+    console.log(event.which);
+    if (event.which !== 8 && event.which < 65 || event.which > 122) {
+      event.preventDefault();
+    }
+    $(event.target).attr('size', event.target.value.length + 1);
+  };
+
+  const setVar = function(event) {
+    const varName = event.target.value;
+
+    $(event.target).attr('size', event.target.value.length);
+    if (!event.target.value) {
+      labelLength(event);
+
+      return;
+    }
+    variables[varName] = [];
+    variables[varName][0] = event.target.parentNode.textContent;
+    variables[varName][1] = $('<span>').text(`[${varName}]`);
+    variables[varName][1].prependTo($('#variable-container'));
+  };
+
+  const remVar = function(event) {
+    const varName = event.target.value;
+
+    if (!variables[varName]) {
+      return;
+    }
+    variables[varName][1].remove();
+    delete variables[varName];
+  };
 
   const clear = function() {
     $screen.empty();
-  };
-
-  const add = function(op1, op2) {
-    return Number(op1) + Number(op2);
-  };
-
-  const subtract = function(op1, op2) {
-    return Number(op1) - Number(op2);
-  };
-
-  const multiply = function(op1, op2) {
-    return Number(op1) * Number(op2);
-  };
-
-  const divide = function(op1, op2) {
-    if (op2 === '0') {
-      return 'ERROR';
-    }
-
-    return Number(op1) / Number(op2);
   };
 
   const evalChunk = function(chunk) {
@@ -34,13 +48,17 @@
 
     switch (chunk[2]) {
       case '+':
-        return add(op1, op2);
+        return Number(op1) + Number(op2);
       case '-':
-        return subtract(op1, op2);
+        return Number(op1) - Number(op2);
       case '*':
-        return multiply(op1, op2);
+        return Number(op1) * Number(op2);
       case '/':
-        return divide(op1, op2);
+        if (op2 === '0') {
+          return 'ERROR';
+        }
+
+        return Number(op1) / Number(op2);
       default:
         return 'ERROR';
     }
@@ -82,10 +100,10 @@
       for (let i = 0; i < diff * -1; i++) {
         $screen.prepend($('<span>').text(' '));
       }
+
       return;
     }
     for (const screen of $('.screen.solved')) {
-      console.log(screen);
       for (let i = 0; i < diff; i++) {
         $(screen).prepend($('<span>').text(' '));
       }
@@ -95,15 +113,34 @@
   const printResult = function(result) {
     padScreens();
     $screen.addClass('solved');
-    $('<span>').addClass('operator').text(' = ').appendTo($screen);
-    $('<span>').addClass('result').text(result).appendTo($screen);
+    $('<span>').addClass('operator equals').text(' = ').appendTo($screen);
+    const $res = $('<span>').addClass('result').text(result).appendTo($screen);
+    const $input = $('<input>').attr('type', 'text').attr('size', '1');
+
+    $input.focusout(setVar).focusin(remVar).keydown(labelLength).appendTo($res);
+    $('title').text($screen.text());
     $screen = $('<div>').addClass('screen').append($('<span>').text(result));
     $('#screen-container').prepend($screen);
   };
 
+  const replaceVars = function(text) {
+    let value = text;
+    const match = text.match(/(\[)([a-z]+)(])/i);
+
+    if (match) {
+      const matchedVar = match[2];
+
+      value = value.replace(match[0], variables[matchedVar][0]);
+      value = replaceVars(value);
+    }
+
+    return value;
+  };
+
   const evaluate = function() {
     const text = $screen.text().replace(/ /g, '');
-    const result = eval1(text);
+    const noVars = replaceVars(text);
+    const result = eval1(noVars);
     const finalResult = eval2(result);
 
     printResult(finalResult);
@@ -144,11 +181,25 @@
     }
   };
 
+  $('#variable-container').on('click', 'span', (event) => {
+    $(event.target).clone().addClass('variable').appendTo($screen);
+  });
+
   $('#buttons-container').on('click', 'button', (event) => {
     toScreen($(event.target).text());
   });
 
+  $('#screen-container').on('click', '.screen span', (event) => {
+    if (event.target.tagName === 'INPUT') {
+      return;
+    }
+    $(event.target).parent().toggleClass('starred');
+  });
+
   $('body').keydown(() => {
+    if (event.target.tagName === 'INPUT') {
+      return;
+    }
     if (event.key.search(/[0-9]|\.|-|\+|\/|\*/) === 0) {
       toScreen(event.key);
 
@@ -156,6 +207,9 @@
     }
     switch (event.key) {
       case 'Enter':
+        $screen.text(evaluate($screen.text()));
+        break;
+      case '=':
         $screen.text(evaluate($screen.text()));
         break;
       case 'Escape':

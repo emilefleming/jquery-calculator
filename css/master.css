@@ -86,8 +86,21 @@ h2 {
   margin-bottom: 30px;
 }
 
+input {
+	padding:0;
+}
+
+.variable {
+	color: #3CC654;
+}
+
 .operator {
   color: #EF382B;
+}
+
+.equals {
+	color: #3C9FC6;
+	opacity: 1;
 }
 
 .screen {
@@ -106,6 +119,44 @@ h2 {
 	white-space:pre;
 }
 
+.starred {
+	opacity: 1;
+}
+
+.starred .result {
+	background-color: #3CC654;
+	color: white;
+	padding: 0 1ch;
+	position: relative;;
+	right: 1ch;
+}
+
+.starred .equals {
+	color: white;
+}
+
+.screen input {
+	display:none;
+}
+
+.starred input {
+	background-color: #3CC654;
+	border: none;
+	color: white;
+	display: inline-block;
+	font-size: .9em;
+	line-height: 1em;
+	margin-left: 1ch;
+}
+
+.starred input:focus {
+	background-color: white;
+	color: #3CC654;
+	outline: none;
+	margin-left: .5ch;
+	padding-left: .5ch;
+}
+
 #screen-container {
   font-size: 24px;
   overflow: scroll;
@@ -116,7 +167,7 @@ h2 {
 	/*background-color: #FCFCFC;*/
   background-color: white;
   bottom: 0;
-  border-top: 1px solid #DDD;
+  /*border-top: 1px solid #DDD;*/
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -183,4 +234,29 @@ h2 {
   background-color: #FFC900;
   color: white;
   width: 100%;
+}
+
+#actions-container button:first-child {
+	color: #3C9FC6;
+}
+
+#actions-container button:first-child:hover {
+	background-color: #3C9FC6;
+	color: white;
+}
+
+#variable-container  {
+	display: flex;
+	color: #3CC654;
+}
+
+#variable-container span {
+	height: 50px;
+	line-height: 50px;
+	padding: 0 2ch;
+}
+
+#variable-container span:hover {
+	background-color: #3CC654;
+	color: white;
 }
