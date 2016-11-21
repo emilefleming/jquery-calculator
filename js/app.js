@@ -6,6 +6,9 @@
   const variables = {};
 
   const labelLength = function(event) {
+    if (event.which === 13 || event.which === 9) {
+      event.target.blur();
+    }
     if (event.which !== 8 && event.which < 65 || event.which > 122) {
       event.preventDefault();
     }
@@ -190,7 +193,6 @@
 
   $('#screen-container').on('click', (event) => {
     if (event.target.tagName !== 'SPAN' && event.target.tagName !== 'LABEL') {
-      console.log(event.target.tagName);
       return;
     }
     $(event.target).parent().toggleClass('starred');
