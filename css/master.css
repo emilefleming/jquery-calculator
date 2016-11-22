@@ -164,25 +164,21 @@ input {
 }
 
 #buttons-container {
-	/*background-color: #FCFCFC;*/
   background-color: white;
   bottom: 0;
-  /*border-top: 1px solid #DDD;*/
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   height: 200px;
   justify-content: center;
   left: 0;
+	padding: 25px 0;
   position: fixed;
   right: 0;
 }
 
-#numbers-container button:last-child {
-  width: 66.66% ;
-}
-
 #numbers-container {
+	background-color: #444;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -190,15 +186,19 @@ input {
 }
 
 #numbers-container button {
-  color: #444;
+	color: white;
 }
 
 #numbers-container button:hover {
-  background-color: #444;
-  color: white;
+	background-color: rgba(255, 255, 255, .5);
+}
+
+#numbers-container button:last-child {
+  width: 66.66% ;
 }
 
 #operators-container {
+	background-color: #EF382B;
   display: flex;
   flex-direction: column;
 	height: 100%;
@@ -206,18 +206,16 @@ input {
 }
 
 #operators-container button {
-  color: #EF382B;
+	color: white;
   width: 100%;
 }
 
 #operators-container button:hover {
-  background-color: #EF382B;
-  color: white;
-  width: 100%;
+	background-color: rgba(255, 255, 255, .5);
 }
 
 #actions-container {
-  color: white;
+	background-color: #FFC900;
   display: flex;
   flex-direction: column;
 	height: 100%;
@@ -225,38 +223,40 @@ input {
 }
 
 #actions-container button {
-  color: #FFC900;
+	color: white;
   letter-spacing: 1px;
   width: 100%;
 }
 
 #actions-container button:hover {
-  background-color: #FFC900;
-  color: white;
-  width: 100%;
+	background-color: rgba(255, 255, 255, .5);
 }
 
 #actions-container button:first-child {
-	color: #3C9FC6;
-}
-
-#actions-container button:first-child:hover {
 	background-color: #3C9FC6;
 	color: white;
 }
 
+#actions-container button:first-child:hover {
+	background-color: #9ECFE3;
+}
+
+
 #variable-container  {
 	display: flex;
-	color: #3CC654;
+	flex-wrap: wrap;
+	background-color: #3CC654;
+	max-width: 50%;
+	overflow-y: scroll;
 }
 
 #variable-container span {
-	height: 50px;
-	line-height: 50px;
+	color: white;
+	height: 37.5px;
+	line-height: 37.5px;
 	padding: 0 2ch;
 }
 
 #variable-container span:hover {
-	background-color: #3CC654;
-	color: white;
+	background-color: rgba(255, 255, 255, .5);
 }
