@@ -168,13 +168,18 @@ input {
   bottom: 0;
   display: flex;
   flex-direction: row;
+	flex-shrink: 0;
   flex-wrap: nowrap;
-  height: 200px;
+  height: 175px;
   justify-content: center;
   left: 0;
-	padding: 25px 0;
+	margin: 25px 0 0 0;
   position: fixed;
   right: 0;
+}
+
+#buttons-container div {
+	flex-shrink: 0;
 }
 
 #numbers-container {
@@ -243,6 +248,7 @@ input {
 
 
 #variable-container  {
+	align-content: flex-start;
 	display: flex;
 	flex-wrap: wrap;
 	background-color: #3CC654;
@@ -252,7 +258,7 @@ input {
 
 #variable-container span {
 	color: white;
-	height: 37.5px;
+	height: 25%;
 	line-height: 37.5px;
 	padding: 0 2ch;
 }
